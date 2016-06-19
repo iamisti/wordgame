@@ -1,1 +1,20 @@
-Current player is: {{vm.player}}
+<div class="gamePanel container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Guess the word (<span style="color:#008000;">{{vm.word.getWordScore(0)}}</span> points): {{vm.mangledWord}}</h2>
+            <label for="playerName" class="sr-only">Word</label>
+            <input type="text" id="playerName" ng-model="vm.guessedWord" class="form-control" placeholder="guessed word" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" ng-click="vm.getRandomWord()">Next</button>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Leaderboard</h2>
+
+            <ol>
+               <li>Steve: 345</li>
+               <li>Joe: 123</li>
+               <li>Amy: 87</li>
+            </ol>
+        </div>
+    </div>
+</div>

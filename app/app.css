@@ -3,6 +3,6 @@
     margin:50px auto;
 }
 
-.loginForm button{
+.loginForm button, .gamePanel button{
     margin-top:10px;
 }

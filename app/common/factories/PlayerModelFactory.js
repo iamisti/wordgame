@@ -24,6 +24,10 @@
           });
     };
 
+    PlayerModel.prototype.getName = function(){
+        return this.playerName;
+    };
+
     PlayerModel.prototype.isSaved = function(){
         return this.isSaved;
     };
