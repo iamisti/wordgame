@@ -1,14 +1,18 @@
-'use strict';
+(function () {
+    'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+    function initializeDatabase() {
+        var config = {
+            apiKey: "AIzaSyDfbl6pRLtCU_4swTCiaoDzqPoJiP8jLYc",
+            authDomain: "wordgame-12ce3.firebaseapp.com",
+            databaseURL: "https://wordgame-12ce3.firebaseio.com",
+            storageBucket: "wordgame-12ce3.appspot.com"
+        };
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+        firebase.initializeApp(config);
+    }
+
+    angular
+        .module('wordGame', ['ui.router', 'wordGame.login'])
+        .config(['$urlRouterProvider', initializeDatabase]);
+}());

@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "name": "wordgame",
+  "description": "A game where you have to guess a mangled word.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/iamisti/wordgame",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -10,6 +10,8 @@
     "angular-route": "~1.5.0",
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",
-    "html5-boilerplate": "^5.3.0"
+    "firebase": "^3.0.5",
+    "bootstrap": "^3.3.6",
+    "angular-ui-router": "^0.3.1"
   }
 }
