@@ -6,7 +6,7 @@
             <h3>Guess the word (<span style="color:#008000;">{{vm.word.getWordScore(vm.mistakes)}}</span> points): {{vm.mangledWord}}</h3>
 
             <label for="playerName" class="sr-only">Word</label>
-            <input type="text" id="playerName" ng-model="vm.guessedWord" class="form-control" placeholder="guessed word" required autofocus>
+            <input type="text" id="playerName" ng-model="vm.guessedWord" class="form-control" placeholder="guessed word" autofocus>
             <button class="btn btn-lg btn-primary btn-block" ng-click="vm.getRandomWord()">Next</button>
         </div>
 

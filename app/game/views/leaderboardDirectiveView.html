@@ -3,7 +3,7 @@
 
     <ol>
         <li ng-repeat="aHighScore in highscores.values track by aHighScore.date">
-            {{aHighScore.playerName}}: {{aHighScore.score}}
+            {{aHighScore.playerName}} ({{aHighScore.score}}) - {{aHighScore.date | date:'yyyy-MM-dd'}}
         </li>
     </ol>
 </div>

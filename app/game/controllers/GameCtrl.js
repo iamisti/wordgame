@@ -3,7 +3,7 @@
 
     function GameCtrl($scope, $interval, PlayerService, WordService, HighScoreService){
         var vm = this;
-        var TIME_TO_PLAY_IN_SECONDS = 15;
+        var TIME_TO_PLAY_IN_SECONDS = 40;
 
         vm.getRandomWord = getRandomWord;
         vm.startGame = startGame;

@@ -16,17 +16,16 @@
     }
 
     WordModel.prototype.getMangledWord = function(){
-        var a = this.wordName.split(""),
-            n = a.length;
+        var splittedWord = this.wordName.split("");
 
-        for(var i = n - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
+        splittedWord = _.shuffle(splittedWord);
+
+        //In case we end up with the same word.
+        if(splittedWord === this.wordName){
+            return this.getMangledWord();
         }
-        
-        return a.join("");  
+
+        return splittedWord.join("");
     };
 
 
