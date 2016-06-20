@@ -1,39 +1,43 @@
 (function(){
     'use strict';
 
-    function HighScoreService($q){
+    function HighScoreService(){
         var service = this;
+        var highScores = {
+            values: []
+        };
 
         service.addHighScore = addHighScore;
         service.getHighScore = getHighScore;
+        service.init = init;
+
+        function init(){
+            setHighScoreListener();
+        }
 
         function addHighScore(playerName, highscore){
-            getHighScore().then(function(storedHighScores){
-                highscore['playerName'] = playerName;
+            highscore['playerName'] = playerName;
 
-                storedHighScores.push(highscore);
+            highScores.values.push(highscore);
 
-                var orderedHighScores = orderHighScore(storedHighScores);
+            var orderedHighScores = orderHighScore(highScores.values);
+            orderedHighScores = _.slice(orderedHighScores, 0, 10);
 
-                orderedHighScores = _.slice(orderedHighScores, 0, 10);
+            firebase.database().ref()
+                .child('/highscores')
+                .set(orderedHighScores);
 
-                firebase.database().ref()
-                    .child('/highscores')
-                    .set(orderedHighScores);
-            });
+            highScores.values = orderedHighScores;
         }
 
         function getHighScore(){
-            var deferred = $q.defer();
+            return highScores;
+        }
 
-            firebase
-                .database().ref('highscores').once('value').then(function (data) {
-                    var orderedHighScores = orderHighScore(data.val());
-
-                    deferred.resolve(orderedHighScores);
-                });
-
-            return deferred.promise;
+        function setHighScoreListener(){
+            firebase.database().ref('highscores').on('value',function (data) {
+                highScores.values = _.values(data.val());
+            });
         }
 
         function orderHighScore(highscores){
@@ -45,5 +49,5 @@
 
     angular
         .module('wordGame.game')
-        .service('HighScoreService', ['$q', HighScoreService]);
+        .service('HighScoreService', [HighScoreService]);
 }());

@@ -9,11 +9,7 @@
             scope: true,
             templateUrl: 'game/views/leaderboardDirectiveView.html',
             link: function($scope){
-                $scope.highscores = [];
-
-                HighScoreService.getHighScore().then(function(highscores){
-                    $scope.highscores = highscores;
-                });
+                $scope.highscores = HighScoreService.getHighScore();
             }
         };
     }

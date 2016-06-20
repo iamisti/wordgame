@@ -6,53 +6,31 @@
             getPlayer: getPlayer
         };
 
-        function getPlayer(name, highscore){
-            return new PlayerModel(name, highscore);
+        function getPlayer(name){
+            return new PlayerModel(name);
         }
     }
 
-    function PlayerModel(name, highscores){
+    function PlayerModel(name){
         this.playerName = name;
-        this.highscores = highscores || [];
-        this.lastAddedHighScore;
+        this.playerScore = {};
     }
 
-    PlayerModel.prototype.addScore = function(score){
+    PlayerModel.prototype.setScore = function(score){
         //TODO: since local highscores will have a sorting, it's not obvious which was the last added score. That's why we need lastAddedHighScore here, to be aware of it.
-        this.lastAddedHighScore = {
+        this.playerScore = {
             'score': score,
             'date': new Date().getTime()
         };
-        
-        this.highscores.push(this.lastAddedHighScore);
     };
 
-    PlayerModel.prototype.getLastHighScore = function(){
-        return this.lastAddedHighScore;
+    PlayerModel.prototype.getScore = function(){
+        return this.playerScore;
     };
 
     PlayerModel.prototype.getName = function(){
         return this.playerName;
     };
-
-    PlayerModel.prototype.setId = function(id){
-        this.id = id;
-    };
-
-    PlayerModel.prototype.getId = function(){
-        return this.id;
-    };
-
-    PlayerModel.prototype.toDto = function(){
-        
-        //TODO: sort highscore list and provide only the top 10 results.
-        return {
-            'name': this.playerName,
-            'highscores': this.highscores
-        }
-    };
-    
-    
 
     angular
         .module('wordGame.common')

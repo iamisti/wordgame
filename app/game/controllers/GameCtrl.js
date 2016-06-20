@@ -3,16 +3,12 @@
 
     function GameCtrl($scope, $interval, PlayerService, WordService, HighScoreService){
         var vm = this;
+        var TIME_TO_PLAY_IN_SECONDS = 15;
 
         vm.getRandomWord = getRandomWord;
         vm.startGame = startGame;
 
         vm.player = PlayerService.getPlayer();
-        vm.guessedWord = '';
-        vm.mistakes = 0;
-        vm.currentPoints = 0;
-        vm.timeToPlayInSeconds = 15;
-        vm.isGameRunning = false;
 
         startGame();
 
@@ -44,10 +40,13 @@
 
         function startGame(){
             vm.isGameRunning = true;
+            vm.guessedWord = '';
+            vm.mistakes = 0;
+            vm.currentPoints = 0;
 
             getRandomWord();
 
-            vm.secondsRemained = vm.timeToPlayInSeconds;
+            vm.secondsRemained = TIME_TO_PLAY_IN_SECONDS;
 
             $interval(function(){
                 vm.secondsRemained--;
@@ -55,16 +54,15 @@
                 if(vm.secondsRemained == 0){
                     endGameAndStoreResults();
                 }
-            }, 1000, vm.timeToPlayInSeconds);
+            }, 1000, TIME_TO_PLAY_IN_SECONDS);
         }
         
         function endGameAndStoreResults(){
             vm.isGameRunning = false;
 
-            vm.player.addScore(vm.currentPoints);
-            
-            PlayerService.updatePlayer(vm.player);
-            HighScoreService.addHighScore(vm.player.getName(), vm.player.getLastHighScore());
+            vm.player.setScore(vm.currentPoints);
+
+            HighScoreService.addHighScore(vm.player.getName(), vm.player.getScore());
         }
 
         function getRandomWord(){
