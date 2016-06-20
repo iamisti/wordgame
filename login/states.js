@@ -11,7 +11,7 @@
             isAuthenticationRequired: false,
             views: {
                 'main': {
-                    templateUrl: '/login/views/login.html',
+                    templateUrl: 'login/views/login.html',
                     controller: 'LoginCtrl as vm'
                 }
             }

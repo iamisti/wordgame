@@ -11,7 +11,7 @@
             isAuthenticationRequired: true,
             views: {
                 'main': {
-                    templateUrl: '/game/views/game.html',
+                    templateUrl: 'game/views/game.html',
                     controller: 'GameCtrl as vm'
                 }
             }
