@@ -15,7 +15,6 @@
         this.playerName = name;
         this.highscores = highscores || [];
         this.lastAddedHighScore;
-        this.isSaved = false;
     }
 
     PlayerModel.prototype.addScore = function(score){
@@ -34,14 +33,6 @@
 
     PlayerModel.prototype.getName = function(){
         return this.playerName;
-    };
-
-    PlayerModel.prototype.isSaved = function(){
-        return this.isSaved;
-    };
-
-    PlayerModel.prototype.setSaved = function(isSaved){
-        this.isSaved = isSaved ? true : false;
     };
 
     PlayerModel.prototype.setId = function(id){

@@ -7,14 +7,20 @@
         service.addHighScore = addHighScore;
         service.getHighScore = getHighScore;
 
-        function addHighScore(highscore){
+        function addHighScore(playerName, highscore){
             getHighScore().then(function(storedHighScores){
-                 console.log(Object.keys(storedHighScores));
-            });
+                highscore['playerName'] = playerName;
 
-            firebase.database().ref()
-                .child('/highscores')
-                .push(highscore);
+                storedHighScores.push(highscore);
+
+                var orderedHighScores = orderHighScore(storedHighScores);
+
+                orderedHighScores = _.slice(orderedHighScores, 0, 10);
+
+                firebase.database().ref()
+                    .child('/highscores')
+                    .set(orderedHighScores);
+            });
         }
 
         function getHighScore(){
@@ -22,10 +28,18 @@
 
             firebase
                 .database().ref('highscores').once('value').then(function (data) {
-                    deferred.resolve(data.val());
+                    var orderedHighScores = orderHighScore(data.val());
+
+                    deferred.resolve(orderedHighScores);
                 });
 
             return deferred.promise;
+        }
+
+        function orderHighScore(highscores){
+            return _.sortBy(highscores, function(aHighScore){
+                return -aHighScore.score;
+            });
         }
     }
 

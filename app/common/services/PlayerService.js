@@ -17,7 +17,6 @@
                 .push(player.toDto());
 
             request.then(function(){
-                player.setSaved(true);
                 player.setId(request.key);
             });
         }

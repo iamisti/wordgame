@@ -5,12 +5,14 @@
         var vm = this;
 
         vm.getRandomWord = getRandomWord;
+        vm.startGame = startGame;
 
         vm.player = PlayerService.getPlayer();
         vm.guessedWord = '';
         vm.mistakes = 0;
         vm.currentPoints = 0;
-        vm.timeToPlayInSeconds = 5;
+        vm.timeToPlayInSeconds = 15;
+        vm.isGameRunning = false;
 
         startGame();
 
@@ -41,6 +43,8 @@
         }
 
         function startGame(){
+            vm.isGameRunning = true;
+
             getRandomWord();
 
             vm.secondsRemained = vm.timeToPlayInSeconds;
@@ -55,10 +59,12 @@
         }
         
         function endGameAndStoreResults(){
+            vm.isGameRunning = false;
+
             vm.player.addScore(vm.currentPoints);
             
             PlayerService.updatePlayer(vm.player);
-            HighScoreService.addHighScore(vm.player.getLastHighScore());
+            HighScoreService.addHighScore(vm.player.getName(), vm.player.getLastHighScore());
         }
 
         function getRandomWord(){

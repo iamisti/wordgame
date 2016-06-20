@@ -1,6 +1,6 @@
 <div class="gamePanel container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8" ng-if="vm.isGameRunning">
             <h2>Your score: {{vm.currentPoints}}</h2>
             <h3>Time remained: {{vm.secondsRemained}}</h3>
             <h3>Guess the word (<span style="color:#008000;">{{vm.word.getWordScore(vm.mistakes)}}</span> points): {{vm.mangledWord}}</h3>
@@ -10,14 +10,14 @@
             <button class="btn btn-lg btn-primary btn-block" ng-click="vm.getRandomWord()">Next</button>
         </div>
 
-        <div class="col-md-4">
-            <h2>Leaderboard</h2>
+        <div class="col-md-8" ng-if="!vm.isGameRunning">
+            <h2>Game is over. Your score is {{vm.currentPoints}}</h2>
 
-            <ol>
-               <li>Steve: 345</li>
-               <li>Joe: 123</li>
-               <li>Amy: 87</li>
-            </ol>
+            <button class="btn btn-lg btn-primary btn-block" ng-click="vm.startGame()">New Game</button>
+        </div>
+
+        <div class="col-md-4">
+            <gameword-leaderboard></gameword-leaderboard>
         </div>
     </div>
 </div>
