@@ -13,14 +13,15 @@
 
     function PlayerModel(name, highscores){
         this.playerName = name;
-        this.highscores = highscores | [];
+        this.highscores = highscores || [];
         this.isSaved = false;
     }
 
-    PlayerModel.prototype.addScore = function(score, date){
+    PlayerModel.prototype.addScore = function(score){
+        console.log(this.highscores)
           this.highscores.push({
               'score': score,
-              'date': date
+              'date': new Date().getTime()
           });
     };
 
@@ -34,6 +35,14 @@
 
     PlayerModel.prototype.setSaved = function(isSaved){
         this.isSaved = isSaved ? true : false;
+    };
+
+    PlayerModel.prototype.setId = function(id){
+        this.id = id;
+    };
+
+    PlayerModel.prototype.getId = function(){
+        return this.id;
     };
 
     PlayerModel.prototype.toDto = function(){

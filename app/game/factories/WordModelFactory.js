@@ -28,6 +28,11 @@
         
         return a.join("");  
     };
+
+
+    WordModel.prototype.getWord = function(){
+        return this.wordName;
+    };
     
     WordModel.prototype.getWordScore = function(mistakes){
         var maximumScore = Math.floor(Math.pow(1.95, (this.wordName.length/3) ));
