@@ -14,15 +14,22 @@
     function PlayerModel(name, highscores){
         this.playerName = name;
         this.highscores = highscores || [];
+        this.lastAddedHighScore;
         this.isSaved = false;
     }
 
     PlayerModel.prototype.addScore = function(score){
-        console.log(this.highscores)
-          this.highscores.push({
-              'score': score,
-              'date': new Date().getTime()
-          });
+        //TODO: since local highscores will have a sorting, it's not obvious which was the last added score. That's why we need lastAddedHighScore here, to be aware of it.
+        this.lastAddedHighScore = {
+            'score': score,
+            'date': new Date().getTime()
+        };
+        
+        this.highscores.push(this.lastAddedHighScore);
+    };
+
+    PlayerModel.prototype.getLastHighScore = function(){
+        return this.lastAddedHighScore;
     };
 
     PlayerModel.prototype.getName = function(){

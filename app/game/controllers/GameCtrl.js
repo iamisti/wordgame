@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    function GameCtrl($scope, $interval, PlayerService, GameService){
+    function GameCtrl($scope, $interval, PlayerService, WordService, HighScoreService){
         var vm = this;
 
         vm.getRandomWord = getRandomWord;
@@ -58,13 +58,14 @@
             vm.player.addScore(vm.currentPoints);
             
             PlayerService.updatePlayer(vm.player);
+            HighScoreService.addHighScore(vm.player.getLastHighScore());
         }
 
         function getRandomWord(){
             vm.guessedWord = '';
             vm.mistakes = 0;
 
-            GameService.getWord().then(function(word){
+            WordService.getWord().then(function(word){
                 vm.word = word;
                 vm.mangledWord = word.getMangledWord();
             });
@@ -73,5 +74,5 @@
 
     angular
         .module('wordGame.game')
-        .controller('GameCtrl', ['$scope', '$interval', 'PlayerService', 'GameService', GameCtrl]);
+        .controller('GameCtrl', ['$scope', '$interval', 'PlayerService', 'WordService', 'HighScoreService', GameCtrl]);
 }());

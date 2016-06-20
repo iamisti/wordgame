@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    function GameService($q, WordModelFactory){
+    function WordService($q, WordModelFactory){
         var service = this;
         var words = [];
 
@@ -51,5 +51,5 @@
 
     angular
         .module('wordGame.game')
-        .service('GameService', ['$q', 'WordModelFactory', GameService]);
+        .service('WordService', ['$q', 'WordModelFactory', WordService]);
 }());
